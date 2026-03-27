@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IPL 2025 GC Predictions</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Floating cricket balls -->
+  <div class="bg-balls">
+    <div class="ball b1"></div>
+    <div class="ball b2"></div>
+    <div class="ball b3"></div>
+    <div class="ball b4"></div>
+  </div>
+
+  <!-- Scoreboard ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span>🏏 IPL 2025 PREDICTIONS ARE OPEN &nbsp;•&nbsp; WHO WILL LIFT THE TROPHY? &nbsp;•&nbsp; SUBMIT YOUR PICKS BEFORE DEADLINE &nbsp;•&nbsp; MAY THE BEST PREDICTOR WIN &nbsp;•&nbsp; 🏆 IPL 2025 &nbsp;•&nbsp; 🔥 ORANGE CAP RACE &nbsp;•&nbsp; 💜 PURPLE CAP RACE &nbsp;•&nbsp; 🏏 IPL 2025 PREDICTIONS ARE OPEN &nbsp;•&nbsp; WHO WILL LIFT THE TROPHY? &nbsp;•&nbsp; SUBMIT YOUR PICKS BEFORE DEADLINE &nbsp;•&nbsp; MAY THE BEST PREDICTOR WIN &nbsp;•&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="trophy-glow"></div>
+    <div class="hero-inner">
+      <p class="hero-sub">🏏 GC Predictions &nbsp;|&nbsp; IPL 2025</p>
+      <h1 class="hero-title">WHO<br/><span>WINS</span><br/>IT ALL?</h1>
+      <p class="hero-desc">Lock in your predictions before the tournament heats up. Pick your champion, your stars, and prove you know cricket best.</p>
+      <button class="cta-btn" onclick="scrollToForm()">
+        <span>Submit Your Prediction</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-box"><span id="totalPreds">0</span><label>Predictions</label></div>
+      <div class="stat-box"><span id="topTeam">—</span><label>Most Picked Team</label></div>
+      <div class="stat-box"><span id="daysLeft">—</span><label>Days Left</label></div>
+    </div>
+  </header>
+
+  <!-- FORM SECTION -->
+  <section class="form-section" id="predForm">
+    <div class="form-card">
+      <div class="form-header">
+        <div class="form-icon">🏏</div>
+        <h2>Lock In Your Picks</h2>
+        <p>One submission per person. Choose wisely.</p>
+      </div>
+
+      <div class="form-body">
+        <!-- Name -->
+        <div class="field-group">
+          <label>Your Name</label>
+          <input type="text" id="userName" placeholder="Enter your name..." maxlength="30" />
+        </div>
+
+        <!-- Champion Team -->
+        <div class="field-group">
+          <label>🏆 IPL 2025 Champion</label>
+          <p class="field-hint">Which team will lift the trophy?</p>
+          <div class="team-grid" id="teamGrid"></div>
+        </div>
+
+        <!-- MVP -->
+        <div class="field-group">
+          <label>⭐ Player of the Tournament (MVP)</label>
+          <p class="field-hint">Who will be the standout performer?</p>
+          <div class="player-grid" id="mvpGrid"></div>
+        </div>
+
+        <!-- Orange Cap -->
+        <div class="field-group">
+          <label><span class="cap orange-cap">🟠</span> Orange Cap — Most Runs</label>
+          <p class="field-hint">Top run-scorer of IPL 2025</p>
+          <div class="player-grid" id="orangeGrid"></div>
+        </div>
+
+        <!-- Purple Cap -->
+        <div class="field-group">
+          <label><span class="cap purple-cap">🟣</span> Purple Cap — Most Wickets</label>
+          <p class="field-hint">Top wicket-taker of IPL 2025</p>
+          <div class="player-grid" id="purpleGrid"></div>
+        </div>
+
+        <button class="submit-btn" id="submitBtn" onclick="submitPrediction()">
+          <span>Submit Prediction</span> 🚀
+        </button>
+        <p class="submit-note" id="formMsg"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERBOARD -->
+  <section class="leaderboard-section" id="leaderboard">
+    <div class="section-title">
+      <h2>GC Predictions Board</h2>
+      <p>See what everyone's predicting</p>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="summary-strip">
+      <div class="sum-card" id="sumChampion">
+        <h4>🏆 Champion Favourite</h4>
+        <div class="sum-val" id="favTeam">—</div>
+      </div>
+      <div class="sum-card" id="sumMVP">
+        <h4>⭐ MVP Favourite</h4>
+        <div class="sum-val" id="favMVP">—</div>
+      </div>
+      <div class="sum-card" id="sumOrange">
+        <h4>🟠 Orange Cap Favourite</h4>
+        <div class="sum-val" id="favOrange">—</div>
+      </div>
+      <div class="sum-card" id="sumPurple">
+        <h4>🟣 Purple Cap Favourite</h4>
+        <div class="sum-val" id="favPurple">—</div>
+      </div>
+    </div>
+
+    <!-- Entries Table -->
+    <div class="table-wrap">
+      <table class="pred-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>🏆 Champion</th>
+            <th>⭐ MVP</th>
+            <th>🟠 Orange Cap</th>
+            <th>🟣 Purple Cap</th>
+          </tr>
+        </thead>
+        <tbody id="predTableBody">
+          <tr class="empty-row">
+            <td colspan="6">No predictions yet. Be the first!</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <footer class="footer">
+    <p>IPL 2025 GC Predictions &nbsp;•&nbsp; Made with 🏏 & ❤️</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
